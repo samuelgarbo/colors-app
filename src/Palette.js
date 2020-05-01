@@ -32,7 +32,7 @@ class Palette extends Component {
                 handleChange={this.changeFormat}
                 ></NavBar>
                 <div className='Palette-colors'>
-                    {/* bunch of colorboxes */}
+                    
                     {colorBoxes}
                 </div>
                 <footer className='Palette-footer'>
