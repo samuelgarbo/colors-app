@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Route, Switch} from 'react-router-dom';
 import './App.css';
 import Palette from './Palette';
 import seedColors from './seedColors';
@@ -9,9 +10,13 @@ function App() {
   
     console.log(generatePalette(seedColors[1]))
     return (
-      <div>
-          <Palette palette={generatePalette(seedColors[1])}></Palette>
-      </div>
+      <Switch>
+        <Route exact path='/'></Route>
+        <Route exact path='/palette/:id'></Route>
+      </Switch>
+      // <div>
+      //     <Palette palette={generatePalette(seedColors[1])}></Palette>
+      // </div>
     );
   
 }
