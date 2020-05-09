@@ -6,6 +6,14 @@ import {Link} from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 
 const styles = {
+    palette: {
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    paletteColors: {
+        height: '90%'
+    },  
     goBack : {
         width: '20%',
         height: '50%',
@@ -75,9 +83,9 @@ class SingleColorPalette extends Component {
                 ></ColorBox>
         ));
         return(
-            <div className='SingleColorPalette Palette'>
+            <div className={classes.palette}>
                 <NavBar handleChange={this.changeFormat} showingAllColors= {false}></NavBar>
-                <div className='Palette-colors'>
+                <div className={classes.paletteColors}>
                     {colorBoxes}
                     <div className={classes.goBack}>
                         <Link to={`/palette/${id}`} className={classes.backButton}>Go back</Link>
