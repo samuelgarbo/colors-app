@@ -10,8 +10,10 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Button from '@material-ui/core/Button';
+import {ChromePicker} from 'react-color';
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -122,6 +124,21 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />        
+        <Typography variant='h4'>
+          Design your Palette
+        </Typography>
+        <div>
+          <Button variant="contained" color="secondary">
+            Clear Palette
+          </Button>
+          <Button variant="contained" color="primary">
+            Random color
+          </Button>
+        </div>
+        <ChromePicker color='green' onChangeComplete={color => console.log(color)}/>
+        <Button variant="contained" color="primary">
+            Add Color
+          </Button>
       </Drawer>
       <main
         className={clsx(classes.content, {
