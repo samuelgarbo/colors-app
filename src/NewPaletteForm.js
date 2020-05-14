@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft() {
+export default function NewPaletteForm(props) {
   const classes = useStyles();
   // const theme = useTheme();
   const [open, setOpen] = useState(true);
@@ -94,8 +94,7 @@ export default function PersistentDrawerLeft() {
         ({ color }) => color !== currentColor
       )
     )
-  })
-  
+  });  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -116,17 +115,28 @@ export default function PersistentDrawerLeft() {
     }  
     setColors([...colors, newColor]);
     setNewName('');
-    console.log(colors);
   }
 
   const handleChange = (evt) => {
     setNewName(evt.target.value);
   }
 
+  const handleSubmit = () => {
+    const newName = 'New Test Palette'
+    const newPalette = {
+      colors: colors,
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, '-')
+    }
+    props.savePalette(newPalette);
+    props.history.push('/');
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
+        color="default"
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
@@ -145,6 +155,13 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
+          <Button 
+            variant="contained" 
+            color="primary"
+            onClick={handleSubmit} 
+          >
+            Save palette
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
