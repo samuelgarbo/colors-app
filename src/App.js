@@ -10,6 +10,9 @@ import {generatePalette} from './colorHelpers';
 
 
 class App extends Component { 
+  static defaultProps = {
+    maxColors: 20
+  };
   constructor(props){
     super(props);
     this.state = {
@@ -34,7 +37,12 @@ class App extends Component {
           <Route 
             exact
             path='/palette/new'
-            render={(routeProps) => <NewPaletteForm savePalette={this.savePalette} palettes={this.state.palettes} {...routeProps}></NewPaletteForm>}
+            render={(routeProps) => <NewPaletteForm 
+                                      savePalette={this.savePalette} 
+                                      palettes={this.state.palettes} 
+                                      maxColors= {this.props.maxColors}
+                                      {...routeProps}
+                                    ></NewPaletteForm>}
           ></Route>
           <Route 
             exact 
