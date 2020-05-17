@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import PaletteFormNav from './PaletteFormNav';
+import ColorPickerForm from './ColorPickerForm';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
@@ -8,8 +9,6 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
-import {ChromePicker} from 'react-color';
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import DraggableColorList from './DraggableColorList';
 import {arrayMove} from 'react-sortable-hoc';
 
@@ -85,19 +84,7 @@ export default function NewPaletteForm(props) {
   
   const isPaletteFull = colors.length >= maxColors;
 
-  useEffect(()=>{
-    ValidatorForm.addValidationRule('isColorNameUnique', (value) =>       
-      colors.every(
-        ({ name }) => name.toLowerCase() !== value.toLowerCase()
-      )
-    );
-    ValidatorForm.addValidationRule('isColorUnique', (value) =>       
-      colors.every(
-        ({ color }) => color !== currentColor
-      )
-    );
-    
-  });  
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -208,29 +195,15 @@ export default function NewPaletteForm(props) {
               Random color
           </Button>
         </div>
-        <ChromePicker 
-          color={currentColor} 
-          onChangeComplete={updateCurrentColor}
+        <ColorPickerForm
+          currentColor={currentColor}
+          updateCurrentColor={updateCurrentColor}
+          addColor={addColor}
+          newColorName={newColorName}
+          handleColorNameChange={handleColorNameChange}
+          isPaletteFull={isPaletteFull}
+          colors={colors}
         />
-        <ValidatorForm 
-          onSubmit={addColor}          
-          onError={errors => console.log(errors)}
-        >
-          <TextValidator 
-            value={newColorName} 
-            onChange={handleColorNameChange}
-            validators={['required', 'isColorNameUnique', 'isColorUnique']}
-            errorMessages={['this field is required', 'name is already used', 'color is already used']}
-          />
-          <Button 
-            variant="contained" 
-            color="primary" 
-            type='submit'   
-            disabled={isPaletteFull}         
-            style={{backgroundColor: isPaletteFull ? 'lightgrey' : currentColor}}>
-              {isPaletteFull ? 'Palette full' : 'Add color'}
-          </Button>
-        </ValidatorForm>
       </Drawer>
       <main
         className={clsx(classes.content, {
