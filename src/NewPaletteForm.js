@@ -75,7 +75,7 @@ export default function NewPaletteForm(props) {
   const {palettes, maxColors} = props;
   
   const classes = useStyles();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [currentColor, setCurrentColor] = useState('');
   const [colors, setColors] = useState(props.palettes[0].colors);
   const [newColorName, setNewColorName] = useState('');
@@ -137,12 +137,13 @@ export default function NewPaletteForm(props) {
     setNewPaletteName(evt.target.value);
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (newEmoji) => {
     
     const newPalette = {
       colors: colors,
       paletteName: newPaletteName,
-      id: newPaletteName.toLowerCase().replace(/ /g, '-')
+      id: newPaletteName.toLowerCase().replace(/ /g, '-'),
+      emoji: newEmoji
     }
     props.savePalette(newPalette);
     props.history.push('/');

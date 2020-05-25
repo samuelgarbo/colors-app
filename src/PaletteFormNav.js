@@ -55,14 +55,18 @@ function PaletteFormNav(props){
     const { open, palettes, handleDrawerOpen, handleSubmit, newPaletteName, handlePaletteNameChange } = props;
     const classes = useStyles();
 
-    const [openPaletteMetaForm, setOpenPaletteMetaForm] = useState(false);
+    const [openPaletteMetaForm, setOpenPaletteMetaForm] = useState('');
 
     const handleClickOpen = () => {
-        setOpenPaletteMetaForm(true);
+        setOpenPaletteMetaForm('paletteName');
+    };
+
+    const emoji =  () => {
+        setOpenPaletteMetaForm('emoji');
     };
 
     const handleClose = () => {
-        setOpenPaletteMetaForm(false);
+        setOpenPaletteMetaForm('');
     };
 
     
@@ -97,7 +101,7 @@ function PaletteFormNav(props){
                     <Button variant="contained" color="primary" onClick={handleClickOpen} className={classes.navBarButton}>
                         Save palette
                     </Button>
-                    <PaletteMetaForm palettes={palettes} open={openPaletteMetaForm} handleClose={handleClose} handleSubmit={handleSubmit} newPaletteName={newPaletteName} handlePaletteNameChange={handlePaletteNameChange}/>
+                    <PaletteMetaForm emoji={emoji} palettes={palettes} open={openPaletteMetaForm} handleClose={handleClose} handleSubmit={handleSubmit} newPaletteName={newPaletteName} handlePaletteNameChange={handlePaletteNameChange}/>
                 </div>
             </AppBar>
         </div>

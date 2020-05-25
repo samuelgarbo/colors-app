@@ -10,7 +10,11 @@ import {Picker} from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 
 function PaletteMetaForm(props) {
-    const {handleSubmit, newPaletteName, handlePaletteNameChange, open, handleClose, palettes} = props;   
+    const {handleSubmit, newPaletteName, handlePaletteNameChange, open, handleClose, palettes, emoji} = props;   
+
+    const handleEmoji = (evt) =>{
+      handleSubmit(evt.native);
+    }
 
     useEffect(() => {
       ValidatorForm.addValidationRule('isPaletteNameUnique', (value) =>
@@ -22,11 +26,15 @@ function PaletteMetaForm(props) {
 
   return (   
 
-    <div>      
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+    <div>   
+      <Dialog open={open === 'emoji'} onClose={handleClose}>
+      <DialogTitle id="form-dialog-title">Choose a palette emoji</DialogTitle>
+        <Picker onSelect={handleEmoji}/>
+      </Dialog>   
+      <Dialog open={open === 'paletteName'} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Choose a palette name</DialogTitle>
         <ValidatorForm
-          onSubmit={handleSubmit}
+          onSubmit={emoji}
           onError={errors => console.log(errors)}
         >
           <DialogContent>
