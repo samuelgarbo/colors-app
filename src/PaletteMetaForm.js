@@ -6,6 +6,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import {Picker} from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
 
 function PaletteMetaForm(props) {
     const {handleSubmit, newPaletteName, handlePaletteNameChange, open, handleClose, palettes} = props;   
