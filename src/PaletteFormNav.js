@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useState} from 'react';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,7 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import PaletteMetaForm from './PaletteMetaForm';
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 const drawerWidth = 400;
 
@@ -27,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         height: '64px'
       },
     appBarShift: {
@@ -41,20 +41,31 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
     },
     navBarBtns: {
-      
+        marginRight: '1rem',
+        '& a': {
+            textDecoration: 'none'
+        }
+    },
+    navBarButton: {
+        margin: '0 0.5rem'       
     }
 }))
 
 function PaletteFormNav(props){   
     const { open, palettes, handleDrawerOpen, handleSubmit, newPaletteName, handlePaletteNameChange } = props;
     const classes = useStyles();
-    useEffect(()=>{
-        ValidatorForm.addValidationRule('isPaletteNameUnique', (value) =>       
-      palettes.every(
-        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-      )
-    )
-    });
+
+    const [openPaletteMetaForm, setOpenPaletteMetaForm] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpenPaletteMetaForm(true);
+    };
+
+    const handleClose = () => {
+        setOpenPaletteMetaForm(false);
+    };
+
+    
     return(
         <div className='classes.root'>
             <CssBaseline />
@@ -79,11 +90,14 @@ function PaletteFormNav(props){
                     Create palette
                 </Typography>
                 </Toolbar>
-                <div className='classes.navBarBtns'>
+                <div className={classes.navBarBtns}>
                     <Link to='/'>
-                    <Button variant='contained' color='secondary'>Go back</Button>
+                        <Button variant='contained' color='secondary' className={classes.navBarButton}>Go back</Button>
                     </Link>
-                    <PaletteMetaForm handleSubmit={handleSubmit} newPaletteName={newPaletteName} handlePaletteNameChange={handlePaletteNameChange}/>
+                    <Button variant="contained" color="primary" onClick={handleClickOpen} className={classes.navBarButton}>
+                        Save palette
+                    </Button>
+                    <PaletteMetaForm palettes={palettes} open={openPaletteMetaForm} handleClose={handleClose} handleSubmit={handleSubmit} newPaletteName={newPaletteName} handlePaletteNameChange={handlePaletteNameChange}/>
                 </div>
             </AppBar>
         </div>
