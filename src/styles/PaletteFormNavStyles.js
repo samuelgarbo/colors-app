@@ -4,6 +4,9 @@ import {DRAWER_WIDTH} from '../constants';
 const drawerWidth = DRAWER_WIDTH;
 
 export default makeStyles((theme) => ({
+    hide: {
+        display: 'none',
+      },
     root: {
         display: 'flex'
     },
