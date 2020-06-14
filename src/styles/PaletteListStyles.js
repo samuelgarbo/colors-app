@@ -1,11 +1,19 @@
 import sizes from './sizes';
+import bg from './Diamond-Sunset.svg';
 export default {
     root: {
-        backgroundColor: 'blue',
         height: '100vh',
         display: 'flex',
         alignItems: 'flex-start',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#ffedcf',
+        /* background by SVGBackgrounds.com */
+        backgroundImage: `url(${bg})`,
+        overflow: 'scroll'
+
+    },
+    title: {
+        fontSize: '2rem'
     },
     container: {
         width: '50%',
