@@ -1,5 +1,7 @@
 import sizes from './sizes';
 import bg from './Diamond-Sunset.svg';
+import { blue, red } from '@material-ui/core/colors';
+
 export default {
     '@global':{
         '.item-enter': {
@@ -85,6 +87,14 @@ export default {
             gridTemplateColumns: '1fr',
             gridGap: '1rem'
         },
+    },
+    checkIcon: {
+        backgroundColor: blue[100],
+        color: blue[600]
+    },
+    closeIcon: {
+        backgroundColor: red[100],
+        color: red[600]
     }
    
 }
