@@ -35,7 +35,7 @@ class NavBar extends Component {
                     <Link to='/'>reactcolorpicker</Link>
                 </div>
                 {showingAllColors && <div>
-                    <span>Level: {level} </span>
+                    <span className={classes.level}>Level: {level} </span>
                     <div className={classes.slider}>
                         <Slider 
                         defaultValue={level} 
