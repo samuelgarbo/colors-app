@@ -14,6 +14,7 @@ function PaletteMetaForm(props) {
 
     const handleEmoji = (evt) =>{
       handleSubmit(evt.native);
+      handleClose();
     }
 
     useEffect(() => {
