@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
 import { withStyles } from '@material-ui/styles';
@@ -15,7 +15,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 
 
-class PaletteList extends Component {
+class PaletteList extends PureComponent {
     constructor(props){
         super(props);
         this.state={
@@ -24,6 +24,7 @@ class PaletteList extends Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.goToPalette = this.goToPalette.bind(this);
     }
     handleClose(){
         this.setState({openDialog: false, deletePaletteId: ''})
@@ -60,7 +61,7 @@ class PaletteList extends Component {
                                     {...palette}
                                     key={palette.id}
                                     handleOpen={this.handleOpen}                                   
-                                    handleClick={() => this.goToPalette(palette.id)}
+                                    goToPalette={this.goToPalette}
                                 ></MiniPalette>
                             </CSSTransition>
                         ))}
