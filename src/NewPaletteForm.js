@@ -24,9 +24,7 @@ export default function NewPaletteForm(props) {
   const [newColorName, setNewColorName] = useState('');
   const [newPaletteName, setNewPaletteName] = useState('');
   
-  const isPaletteFull = colors.length >= maxColors;
-
-  
+  const isPaletteFull = colors.length >= maxColors;  
 
   const handleDrawerOpen = () => {
     setOpen(true);
