@@ -11,16 +11,16 @@ import Button from '@material-ui/core/Button';
 import DraggableColorList from './DraggableColorList';
 import {arrayMove} from 'react-sortable-hoc';
 import useStyles from './styles/NewPaletteFormStyles';
+import seedColors from './seedColors';
 
 
 
 export default function NewPaletteForm(props) {
-  const {palettes, maxColors} = props;
-  
+  const {palettes, maxColors} = props;  
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [currentColor, setCurrentColor] = useState('');
-  const [colors, setColors] = useState(props.palettes[0].colors);
+  const [colors, setColors] = useState(seedColors[0].colors);
   const [newColorName, setNewColorName] = useState('');
   const [newPaletteName, setNewPaletteName] = useState('');
   
